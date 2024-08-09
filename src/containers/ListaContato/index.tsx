@@ -18,7 +18,7 @@ const ListaContato = () => {
 
   return (
     <>
-      <Mensagem>{mensagem}</Mensagem>
+      {mensagem && <Mensagem>{mensagem}</Mensagem>}
       <S.ContainerLista>
         <S.Cabecalho>
           <Titulo childen={"Lista de Contatos"} />
@@ -27,7 +27,7 @@ const ListaContato = () => {
             <>
               <Formulario />
               <Botao onClick={() => setAbreForm(false)} type="button">
-                Cancelar
+                Fechar
               </Botao>
             </>
           ) : (

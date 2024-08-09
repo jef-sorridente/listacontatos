@@ -5,7 +5,6 @@ type Props = {
 };
 
 const Mensagem = ({ children }: Props) => {
-  setTimeout(() => {}, 1000);
   return (
     <MensagemStyled>
       <p>{children}</p>

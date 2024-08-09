@@ -1,12 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ContatoClass from "../../models/Contato";
 import { useEffect, useState } from "react";
-import { remover, editar } from "../../store/reducers/contatos";
+import { remover, editar, resetaMensagem } from "../../store/reducers/contatos";
 
 import { FaTrash } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
 import * as S from "./styles";
+import Mensagem from "../Mensagem";
+import { RootReducer } from "../../store";
 
 type Props = ContatoClass;
 
@@ -17,6 +19,7 @@ const Contato = ({
   telefone: telefoneOrig,
 }: Props) => {
   const dispatch = useDispatch();
+  const { mensagem } = useSelector((state: RootReducer) => state.contatos);
   const [estaEditando, setEstaEditando] = useState(false);
   const [abreAcoes, setAbreAcoes] = useState(false);
 
@@ -50,12 +53,15 @@ const Contato = ({
           telefone,
         })
       );
-      alert("Edição Realizada");
+      // const mensagem = "Edição Realizada";
       setEstaEditando(false);
       setAbreAcoes(false);
     } else {
+      //Não consegui fazer ficar no campo de mensagem :( estudar mais para fazer isso!!!!!
+      //No momento vai ficar como alert mesmo :)
       alert("Os campos não podem ficar vazios, por favor verifique-os!");
     }
+    resetaMsn();
   }
 
   function cancelarEdicao() {
@@ -67,24 +73,32 @@ const Contato = ({
 
   function removerItem() {
     dispatch(remover(id));
-    alert(`Contato removido: ${nome}`);
+    resetaMsn();
   }
 
   const filtraNumeros = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    // Filtra apenas números da entrada
     const novoValor = e.target.value.replace(/[^0-9]/g, "");
     setTelefone(novoValor);
   };
 
+  const resetaMsn = () => {
+    setTimeout(() => {
+      dispatch(resetaMensagem());
+    }, 5000);
+  };
+
   return (
     <ul>
+      {mensagem && <Mensagem>{mensagem}</Mensagem>}
       <S.ListaCorpo key={id}>
         <S.Input
+          maxLength={50}
           disabled={!estaEditando}
           value={nome}
           onChange={({ target }) => setNome(target.value)}
         ></S.Input>
         <S.Input
+          maxLength={50}
           disabled={!estaEditando}
           value={email}
           onChange={({ target }) => setEmail(target.value)}

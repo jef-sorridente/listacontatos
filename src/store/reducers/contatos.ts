@@ -4,6 +4,7 @@ import Contato from "../../models/Contato";
 type ContatoState = {
   itens: Contato[];
   mensagem: string;
+  erro: boolean;
 };
 
 const initialState: ContatoState = {
@@ -28,6 +29,7 @@ const initialState: ContatoState = {
     },
   ],
   mensagem: "",
+  erro: false,
 };
 
 const contatosSlice = createSlice({
@@ -57,6 +59,7 @@ const contatosSlice = createSlice({
     },
     remover: (state, action: PayloadAction<number>) => {
       state.itens = state.itens.filter((c) => c.id !== action.payload);
+      state.mensagem = "Contato removido!";
     },
     editar: (state, action: PayloadAction<Contato>) => {
       const indexDoContato = state.itens.findIndex(
@@ -64,6 +67,7 @@ const contatosSlice = createSlice({
       );
       if (indexDoContato >= 0) {
         state.itens[indexDoContato] = action.payload;
+        state.mensagem = "Edição Realizada!";
       }
     },
     resetaMensagem: (state) => {

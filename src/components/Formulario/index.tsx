@@ -28,10 +28,15 @@ const Formulario = () => {
     resetaMsn();
   };
 
+  const filtraNumeros = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const novoValor = e.target.value.replace(/[^0-9]/g, "");
+    setTelefone(novoValor);
+  };
+
   const resetaMsn = () => {
     setTimeout(() => {
       dispatch(resetaMensagem());
-    }, 3000);
+    }, 5000);
   };
 
   return (
@@ -71,7 +76,7 @@ const Formulario = () => {
               value={telefone}
               type="tel"
               id="tel"
-              onChange={({ target }) => setTelefone(target.value)}
+              onChange={filtraNumeros}
             />
           </S.Campos>
           <Botao type="submit" children="Cadastrar" />

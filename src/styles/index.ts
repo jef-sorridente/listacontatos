@@ -24,23 +24,6 @@ export const Container = styled.div`
   background-color: ${variaveis.brancoFundo};
 `;
 
-export const Botao = styled.button`
-  padding: 8px;
-  width: 110px;
-  border: none;
-  border-radius: 8px;
-  background-image: linear-gradient(
-    45deg,
-    ${variaveis.azul},
-    ${variaveis.verde}
-  );
-  color: ${variaveis.branco};
-  font-weight: 500;
-  cursor: pointer;
-`;
-
-export default EstiloGlobal;
-
 export const animOpacidade = keyframes`
     from{
       opacity: 0;
@@ -51,3 +34,5 @@ export const animOpacidade = keyframes`
      
     }
  `;
+
+export default EstiloGlobal;

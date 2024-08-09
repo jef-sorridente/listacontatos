@@ -3,6 +3,7 @@ import Contato from "../../models/Contato";
 
 type ContatoState = {
   itens: Contato[];
+  mensagem: string;
 };
 
 const initialState: ContatoState = {
@@ -26,6 +27,7 @@ const initialState: ContatoState = {
       telefone: "519777777777",
     },
   ],
+  mensagem: "",
 };
 
 const contatosSlice = createSlice({
@@ -42,7 +44,7 @@ const contatosSlice = createSlice({
       );
       //Verifica se o contato é existente pela const contatoJaExiste
       if (contatoJaExiste) {
-        alert("Já existe um contato com esse e-mail ou número!");
+        state.mensagem = "Já existe um contato com esse e-mail ou número!";
       } else {
         const ultimoContato = state.itens[state.itens.length - 1];
         const contatoNovo = {
@@ -50,15 +52,27 @@ const contatosSlice = createSlice({
           id: ultimoContato ? ultimoContato.id + 1 : 1,
         };
         state.itens.push(contatoNovo);
-        alert("Contato adicionado!");
+        state.mensagem = "Contato adicionado!";
       }
     },
     remover: (state, action: PayloadAction<number>) => {
       state.itens = state.itens.filter((c) => c.id !== action.payload);
     },
+    editar: (state, action: PayloadAction<Contato>) => {
+      const indexDoContato = state.itens.findIndex(
+        (c) => c.id === action.payload.id
+      );
+      if (indexDoContato >= 0) {
+        state.itens[indexDoContato] = action.payload;
+      }
+    },
+    resetaMensagem: (state) => {
+      state.mensagem = "";
+    },
   },
 });
 
-export const { cadastrar, remover } = contatosSlice.actions;
+export const { cadastrar, remover, editar, resetaMensagem } =
+  contatosSlice.actions;
 
 export default contatosSlice.reducer;

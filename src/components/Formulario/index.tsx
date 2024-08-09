@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { FormEvent, useState } from "react";
-import { cadastrar } from "../../store/reducers/contatos";
-import { Botao } from "../../styles";
+import { cadastrar, resetaMensagem } from "../../store/reducers/contatos";
+import Botao from "../Botao";
 import * as S from "./styles";
 
 const Formulario = () => {
@@ -25,6 +25,13 @@ const Formulario = () => {
     setNome("");
     setEmail("");
     setTelefone("");
+    resetaMsn();
+  };
+
+  const resetaMsn = () => {
+    setTimeout(() => {
+      dispatch(resetaMensagem());
+    }, 3000);
   };
 
   return (
@@ -36,6 +43,7 @@ const Formulario = () => {
             <label htmlFor="nome">Nome</label>
             <input
               required
+              maxLength={50}
               value={nome}
               type="text"
               id="nome"
@@ -46,6 +54,8 @@ const Formulario = () => {
             <label htmlFor="email">Email</label>
             <input
               required
+              minLength={3}
+              maxLength={50}
               value={email}
               type="email"
               id="email"
@@ -56,13 +66,15 @@ const Formulario = () => {
             <label htmlFor="tel">Telefone</label>
             <input
               required
+              minLength={8}
+              maxLength={11}
               value={telefone}
               type="tel"
               id="tel"
               onChange={({ target }) => setTelefone(target.value)}
             />
           </S.Campos>
-          <Botao type="submit">Cadastrar</Botao>
+          <Botao type="submit" children="Cadastrar" />
         </S.Formulario>
       </S.ContainerForm>
     </>

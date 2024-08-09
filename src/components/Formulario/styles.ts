@@ -5,8 +5,8 @@ import { animOpacidade } from "../../styles";
 export const ContainerForm = styled.div`
   width: 300px;
   position: absolute;
-  top: 185px;
-  right: 330px;
+  top: 50px;
+  right: 0;
   border: 1px solid ${variaveis.cinza};
   border-radius: 8px;
   z-index: 5;

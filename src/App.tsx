@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 
 import Cabecalho from "./containers/Cabecalho";
-import Lista from "./containers/Lista";
+import ListaContato from "./containers/ListaContato";
 import EstiloGlobal, { Container } from "./styles";
 import store from "./store";
 
@@ -11,7 +11,7 @@ function App() {
       <EstiloGlobal />
       <Container>
         <Cabecalho />
-        <Lista />
+        <ListaContato />
       </Container>
     </Provider>
   );

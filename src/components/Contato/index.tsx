@@ -5,6 +5,8 @@ import { remover, editar, resetaMensagem } from "../../store/reducers/contatos";
 
 import { FaTrash } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
+import { FaX } from "react-icons/fa6";
 
 import * as S from "./styles";
 import Mensagem from "../Mensagem";
@@ -116,11 +118,11 @@ const Contato = ({
             {estaEditando ? (
               <>
                 <S.Opcoes onClick={salvaEdicao}>
-                  <MdEdit color="green" />
+                  <FaCheck color="green" />
                   <span>Salvar</span>
                 </S.Opcoes>
                 <S.Opcoes onClick={cancelarEdicao}>
-                  <FaTrash color="red" />
+                  <FaX color="red" />
                   <span>Cancelar</span>
                 </S.Opcoes>
               </>

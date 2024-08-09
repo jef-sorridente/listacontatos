@@ -58,8 +58,10 @@ export const Opcoes = styled.button`
   border-bottom: 1px solid ${variaveis.cinza};
   padding: 8px;
   cursor: pointer;
+  display: flex;
   svg {
     font-size: 12px;
+
     margin-right: 8px;
   }
   animation: ${animOpacidade} 0.3s forwards;
